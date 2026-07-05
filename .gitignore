@@ -1,0 +1,13 @@
+#OS junk files
+.DS_Store
+Thumbs.db
+
+#VS Code settings
+.vscode/
+
+# PHP / config secrets
+config.php
+db_config.php
+
+#Logs (* is a wildcard meaning "match anything", any file that ends in .log)
+*.log
