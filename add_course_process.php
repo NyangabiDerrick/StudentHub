@@ -1,4 +1,5 @@
 <?php
+require "includes/auth_check.php";
 require "db_config.php";
 
 $course_title = $_POST['course_title'];

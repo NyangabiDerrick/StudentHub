@@ -9,7 +9,7 @@ $result = mysqli_query($conn, "
 include "includes/header.php";
 ?>
     <h2>Certificates</h2>
-    <a href="add_certificate.php">+ Add New Certificate</a>
+    <a href="add_certificate.php" class="add-link">+ Add New Certificate</a>
     <table border="1" cellpadding="8">
         <thead><tr><th>ID</th><th>Student</th><th>Certificate</th><th>Issuing Body</th><th>Date Earned</th><th>Actions</th></tr></thead>
         <tbody>
