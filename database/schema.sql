@@ -31,7 +31,7 @@ CREATE TABLE `certificates` (
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   CONSTRAINT `certificates_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `courses` (
   `level` varchar(30) NOT NULL,
   `department` varchar(40) NOT NULL,
   PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `student_status_history` (
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   CONSTRAINT `student_status_history_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +81,7 @@ CREATE TABLE `student_units` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
-  `status` varchar(15) NOT NULL,
+  `status` varchar(30) DEFAULT NULL,
   `grade` varchar(10) DEFAULT NULL,
   `year_taken` varchar(15) NOT NULL,
   `semester_taken` varchar(15) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE `student_units` (
   KEY `unit_id` (`unit_id`),
   CONSTRAINT `student_units_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`),
   CONSTRAINT `student_units_ibfk_2` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
   `student_id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(50) NOT NULL,
-  `registration_number` varchar(15) NOT NULL,
+  `registration_number` varchar(50) DEFAULT NULL,
   `course_id` int(11) NOT NULL,
   `date_of_birth` date NOT NULL,
   `gender` varchar(10) NOT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE `students` (
   UNIQUE KEY `registration_number` (`registration_number`),
   KEY `course_id` (`course_id`),
   CONSTRAINT `students_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `units` (
   PRIMARY KEY (`unit_id`),
   KEY `course_id` (`course_id`),
   CONSTRAINT `units_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -149,4 +149,4 @@ CREATE TABLE `units` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-06  8:52:24
+-- Dump completed on 2026-07-14 15:36:52

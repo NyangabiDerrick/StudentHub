@@ -58,7 +58,7 @@
 |student_id|int|foreign key referencing students.student_id|
 |status|VARCHAR(15)|active / suspended / graduated / deferred|
 |reason|VARCHAR(100)|it is nullable|
-|date_change|date|the date when each change of status occurs|
+|date_changed|date|the date when each change of status occurs|
 
 ### Certificates
 |id|int|primary key, auto increment|
