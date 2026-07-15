@@ -1,9 +1,6 @@
 <?php
-session_start(); // Starts/resumes a session - lets us remember the user is logged in across pages
-
-// Hardcoded admin credentials (simple approach for now)
-$admin_username = "admin";
-$admin_password = "admin2026"; // change this to whatever you want
+session_start();
+require "db_config.php";
 
 $error = "";
 
@@ -11,8 +8,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if ($username === $admin_username && $password === $admin_password) {
-        $_SESSION['loggedin'] = true; // mark the session as logged in
+    // Look up this username in the users table
+    $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username = ?");
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $user = mysqli_fetch_assoc($result);
+
+    // Check the user exists AND the password matches the stored hash
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['student_id'] = $user['student_id']; // NULL for admin/registrar, set for students
+
         header("Location: index.php");
         exit();
     } else {
@@ -48,6 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit">Login</button>
         </form>
     </div>
-    </main>
+</main>
 </body>
 </html>
